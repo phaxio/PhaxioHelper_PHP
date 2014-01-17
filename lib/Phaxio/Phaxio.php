@@ -130,8 +130,10 @@ class Phaxio
 
             if (! $result) {
                 $opResult = new PhaxioOperationResult(false, "No data received from service.");
-            } else {
+            } else if($result['success']){
                 $opResult = new PhaxioOperationResult($result['success'], $result['message'], $result['data']);
+            } else {
+                $opResult = new PhaxioOperationResult($result['success'], $result['message']);
             }
 
             return $opResult;
