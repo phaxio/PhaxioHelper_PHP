@@ -40,9 +40,9 @@ abstract class AbstractResourceCollection extends \ArrayObject
 
         foreach ($results->getData() as $result) {
             $resource_class = "Phaxio\\{$this->resource_class}";
-            $fax = new $resource_class($this->phaxio);
-            $fax->exchangeArray($result);
-            $this[] = $fax;
+            $arr = new $resource_class($this->phaxio);
+            $arr->exchangeArray($result);
+            $this[] = $arr;
         }
     }
 }
