@@ -5,7 +5,7 @@ class Phaxio
     private $debug = false;
     private $api_key = null;
     private $api_secret = null;
-    private $host = "https://api.phaxio.com/v2/";
+    private $host = "https://api.phaxio.com/v2.1/";
 
     public function __construct($api_key = null, $api_secret = null, $host = null)
     {
@@ -40,6 +40,10 @@ class Phaxio
         return new Phaxio\Account($this);
     }
 
+    public function atas() {
+        return new Phaxio\ATAs($this);
+    }
+
     # Convenience methods
 
     public function sendFax($params) {
@@ -50,12 +54,26 @@ class Phaxio
         return $this->faxes()->init($id);
     }
 
-    public function retriveFaxFile($id, $params = array()) {
+    public function retrieveFaxFile($id, $params = array()) {
         return $this->initFax($id)->getFile()->retrieve($params);
     }
 
     public function listFaxes($params = array()) {
         return $this->faxes()->getList($params);
+    }
+
+    public function listATAs()
+    {
+        return $this->atas()->getList();
+    }
+
+    public function initATA($id) {
+        return $this->atas()->init($id);
+    }
+
+    public function retrieveATA($id)
+    {
+        return $this->initATA($id)->retrieve();
     }
 
     public function retrieveDefaultPhaxCode($getMetadata = false)
